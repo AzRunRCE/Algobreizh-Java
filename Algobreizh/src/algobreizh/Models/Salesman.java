@@ -7,11 +7,13 @@ package algobreizh.Models;
 
 import java.sql.Date;
 import java.sql.Time;
+import algobreizh.Managers.MeetingsManager;
 
 /**
  *
  * @author paul
  */
+
 public class Salesman {
     
     int id;
@@ -24,14 +26,17 @@ public class Salesman {
         this.lastname = _lastname;
     }
     
+    public Salesman(int _id){
+        this.id = _id;
+    }
+    
     public Salesman(){
         
     }
-
         
-    public Meeting addMeeting(Customer _customer, Date meetingDate, Time meetingHour, String infos){
-        Meeting newMeeting = new Meeting(this, _customer, meetingDate, meetingHour, infos);
-        return newMeeting;
+    public void addMeeting(Customer _customer, Date meetingDate, Time meetingHour, String infos){
+        Meeting m = new Meeting(this, _customer, meetingDate, meetingHour, infos);
+        MeetingsManager.add(m);
     }
     
     public int getId() {

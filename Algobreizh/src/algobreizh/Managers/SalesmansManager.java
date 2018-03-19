@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class SalesmansManager {
     
-    public Salesman get(int idSalesman){
+    public static Salesman get(int idSalesman){
         String querry = "SELECT * FROM tSalesman WHERE id = " + idSalesman;
         Salesman salesman = new Salesman();
         ResultSet res = DatabaseConnection.execute(querry);
@@ -31,6 +31,13 @@ public class SalesmansManager {
             }
         }
         return salesman;
+    }
+    
+    public void set(Salesman s){
+        String querry = "INSERT INTO tSalesman VALUES ("
+                + "\'" + s.getFirstname() 
+                + "\',\'" + s.getLastname()
+                + "\')";
     }
     
 }

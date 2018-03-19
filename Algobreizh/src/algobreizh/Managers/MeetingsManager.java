@@ -25,8 +25,8 @@ public class MeetingsManager{
     public CustomersManager customersManager;
     
     // Ajoute un rendez-vous
-    public void add(Meeting m){
-        String querry = "INSERT INTO tMeetings VALUES (\'" + m.getSalesman().getId()
+    public static void add(Meeting m){
+        String querry = "INSERT INTO tMeetings(id_tSalesman, id_tCustomer, date, hour, infos) VALUES (\'" + m.getSalesman().getId()
                 + "\',\'" + m.getCustomer().getId()
                 + "\',\'" + m.getDate()
                 + "\',\'" + m.getHour()
@@ -36,15 +36,15 @@ public class MeetingsManager{
     }
     
     // Supprime le rendez-vous précisé
-    public void delete(Meeting m){
+    public static void delete(Meeting m){
         String querry = "DELETE * FROM tMeetings WHERE id = " + m.getId();
         DatabaseConnection.execute(querry);
     }
     
     // Retourne les rendez-vous d'un commercial précis
-    public ArrayList<Meeting> getAll(Salesman s){
+    public static ArrayList<Meeting> getAll(Salesman s){
         ArrayList<Meeting> meetings = new ArrayList<>();
-        String querry = "SELECT * FROM tMeetings WHERE id_seller = " + s.getId();
+        String querry = "SELECT * FROM tMeetings WHERE id_tSalesman = " + s.getId();
         ResultSet res = DatabaseConnection.execute(querry);
         if (res != null) {
             try {
@@ -54,12 +54,19 @@ public class MeetingsManager{
                     Time hour = res.getTime("hour");
                     int idCustomer = res.getInt("id_tCustomer");
                     int idSalesman = res.getInt("id_tSalesman");
-                    Customer customer = customersManager.get(idCustomer);
-                    Salesman salesman = salesmansManager.get(idSalesman);
-                    String info = res.getString("info");
-                    meetings.add(new Meeting(id, salesman, customer, date, hour, info));
+                    String info = res.getString("infos");
+                    Meeting m = new Meeting(
+                            id, // id du meeting
+                            SalesmansManager.get(idSalesman), // commerciale prévu sur ce rdv
+                            CustomersManager.get(idCustomer), // client rencontré
+                            date, // date du rdv
+                            hour, // heure
+                            info // informations supplémentaires
+                    );
+                    meetings.add(m);
 		}
             } catch (SQLException e) {
+                System.out.println("Algobreizh SQL Exception: " + e);
             }
         }
         return meetings;

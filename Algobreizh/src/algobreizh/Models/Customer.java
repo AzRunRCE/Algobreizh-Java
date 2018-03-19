@@ -15,9 +15,9 @@ public class Customer {
     String firstname;
     String lastname;
     String email;
-    String city;
+    City city;
     
-    public Customer(int _id, String _firstname, String _lastname, String _email, String _city){
+    public Customer(int _id, String _firstname, String _lastname, String _email, City _city){
         this.id = _id;
         this.firstname = _firstname;
         this.lastname = _lastname;
@@ -61,11 +61,11 @@ public class Customer {
         this.email = email;
     }
 
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
     
