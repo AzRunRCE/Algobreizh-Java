@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package algobreizh.Models;
-
 /**
  *
  * @author paul
@@ -16,6 +15,7 @@ public class City {
     private Salesman salesman;
 
     public City(){
+     
         
     }
     
@@ -24,11 +24,9 @@ public class City {
     }
     
     public City(int _id, String _name, Salesman _salesman){
-        
-        this.id = _id;
-        this.name = _name;
-        this.salesman = _salesman;
-        
+      this.setId(_id);
+      this.setName(_name);
+      this.setSalesman(_salesman);       
     }
     
     public int getId() { return id; }

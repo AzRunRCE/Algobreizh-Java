@@ -7,8 +7,10 @@ package algobreizh.Views;
 
 /**
  *
- * @author paul
+ * @author quentinmartinez
  */
-public class MeetingConfirmView {
-    
+public interface DefaultTableModel {
+	abstract void removeRow(int row);
+	abstract Object getItem(int index);
+	abstract void addRow(Object row);
 }

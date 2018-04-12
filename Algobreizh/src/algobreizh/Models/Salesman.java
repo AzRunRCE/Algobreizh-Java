@@ -7,7 +7,6 @@ package algobreizh.Models;
 
 import java.sql.Date;
 import java.sql.Time;
-import algobreizh.Managers.MeetingsManager;
 
 /**
  *
@@ -33,12 +32,7 @@ public class Salesman {
     public Salesman(){
         
     }
-        
-    public void addMeeting(Customer _customer, Date meetingDate, Time meetingHour, String infos){
-        Meeting m = new Meeting(this, _customer, meetingDate, meetingHour, infos);
-        MeetingsManager.add(m);
-    }
-    
+          
     public int getId() {
         return id;
     }

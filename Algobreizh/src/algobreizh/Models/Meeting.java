@@ -6,7 +6,7 @@
 package algobreizh.Models;
 
 import java.sql.Date;
-import java.sql.Time;
+
 
 /**
  *
@@ -18,26 +18,20 @@ public class Meeting {
     private Salesman Salesman;
     private Customer Customer;
     private Date date;
-    private Time hour;
     private String infos;
-    
+    private String contact;
+    private String telephone;
     // Constructor with id
-    public Meeting (int _id, Salesman _salesman, Customer _customer, Date _date, Time _hour, String _infos){
+    public Meeting (int _id, Salesman _salesman, Customer _customer, Date _date, String _infos,String _contact,String _telephone){
         this.id = _id;
         this.Salesman = _salesman;
         this.Customer = _customer;
         this.date = _date;
-        this.hour = _hour;
         this.infos = _infos;
+        this.contact = _contact;
+        this.telephone = _telephone;
     }
-    // Same without id
-    public Meeting (Salesman _salesman, Customer _customer, Date _date, Time _hour, String _infos){
-        this.Salesman = _salesman;
-        this.Customer = _customer;
-        this.date = _date;
-        this.hour = _hour;
-        this.infos = _infos;
-    }
+
 
     public int getId() {
         return id;
@@ -51,6 +45,10 @@ public class Meeting {
         return Salesman;
     }
 
+    public String getContact() {
+        return contact;
+    }
+    
     public void setSalesman(Salesman Salesman) {
         this.Salesman = Salesman;
     }
@@ -71,20 +69,23 @@ public class Meeting {
         this.date = date;
     }
 
-    public Time getHour() {
-        return hour;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setHour(Time hour) {
-        this.hour = hour;
+    public String setTelephone(String telephone) {
+        return telephone;
     }
-
+    
     public String getInfos() {
         return infos;
     }
 
     public void setInfos(String infos) {
         this.infos = infos;
+    }
+       public void setContact(String contact) {
+        this.contact = contact;
     }
     
 }

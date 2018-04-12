@@ -3,12 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/paul/NetBeansProjects/Algobreizh/src/algobreizh/Models/Meeting.java</file>
-            <file>file:/Users/paul/NetBeansProjects/Algobreizh/src/algobreizh/Managers/MeetingsManager.java</file>
-            <file>file:/Users/paul/NetBeansProjects/Algobreizh/src/algobreizh/Managers/CustomersManager.java</file>
-            <file>file:/Users/paul/NetBeansProjects/Algobreizh/src/algobreizh/Managers/CitiesManager.java</file>
-            <file>file:/Users/paul/NetBeansProjects/Algobreizh/src/algobreizh/Algobreizh.java</file>
-            <file>file:/Users/paul/NetBeansProjects/Algobreizh/src/algobreizh/Managers/SalesmansManager.java</file>
+            <file>file:/Users/quentinmartinez/Documents/Algobreizh-Java/Algobreizh/src/algobreizh/Models/Salesman.java</file>
+            <file>file:/Users/quentinmartinez/Documents/Algobreizh-Java/Algobreizh/src/algobreizh/dao/CustomerDAO.java</file>
+            <file>file:/Users/quentinmartinez/Documents/Algobreizh-Java/Algobreizh/src/algobreizh/Views/MeetingListView.java</file>
+            <file>file:/Users/quentinmartinez/Documents/Algobreizh-Java/Algobreizh/src/algobreizh/Managers/CustomersManager.java</file>
+            <file>file:/Users/quentinmartinez/Documents/Algobreizh-Java/Algobreizh/src/algobreizh/dao/DAO.java</file>
+            <file>file:/Users/quentinmartinez/Documents/Algobreizh-Java/Algobreizh/src/algobreizh/Models/City.java</file>
+            <file>file:/Users/quentinmartinez/Documents/Algobreizh-Java/Algobreizh/src/algobreizh/Models/Customer.java</file>
+            <file>file:/Users/quentinmartinez/Documents/Algobreizh-Java/Algobreizh/src/algobreizh/Models/Meeting.java</file>
+            <file>file:/Users/quentinmartinez/Documents/Algobreizh-Java/Algobreizh/src/algobreizh/Database/DbConnection.java</file>
+            <file>file:/Users/quentinmartinez/Documents/Algobreizh-Java/Algobreizh/src/algobreizh/dao/CityDao.java</file>
         </group>
     </open-files>
 </project-private>
