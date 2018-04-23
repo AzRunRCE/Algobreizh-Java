@@ -16,7 +16,7 @@ public abstract class DAO<T> {
 	  }
 	   /**
 	  * MÈthode de d'éxecution des requêtes SQL
-	  * @param requête
+	  * @param requete
 	  * @return ResultSet 
 	  */
             protected ResultSet execute(String requete)
