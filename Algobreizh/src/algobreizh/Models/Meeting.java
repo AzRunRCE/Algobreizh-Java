@@ -5,7 +5,9 @@
  */
 package algobreizh.Models;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
+
+
 
 
 /**
@@ -17,12 +19,12 @@ public class Meeting {
     private int id;
     private Salesman Salesman;
     private Customer Customer;
-    private Date date;
+    private LocalDateTime date;
     private String infos;
     private String contact;
     private String telephone;
     // Constructor with id
-    public Meeting (int _id, Salesman _salesman, Customer _customer, Date _date, String _infos,String _contact,String _telephone){
+    public Meeting (int _id, Salesman _salesman, Customer _customer, LocalDateTime _date, String _infos,String _contact,String _telephone){
         this.id = _id;
         this.Salesman = _salesman;
         this.Customer = _customer;
@@ -61,11 +63,11 @@ public class Meeting {
         this.Customer = Customer;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDateTime() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

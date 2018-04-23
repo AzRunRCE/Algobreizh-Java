@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -30,7 +31,8 @@ import javax.swing.JTextField;
 public class LoginView extends JFrame {
        
         private JLabel userNameLabel,passwordLabel;
-	private JTextField userNameText, passwordText;
+	private JTextField userNameText;
+        private JPasswordField passwordText;
         private JButton btnQuit,btnConnect;
         
         public LoginView()
@@ -69,7 +71,8 @@ public class LoginView extends JFrame {
             passwordLabel = new JLabel("Mot de passe:");
             panAuth.add(passwordLabel);
            
-	    passwordText = new JTextField();
+	    passwordText = new JPasswordField();
+            passwordText.setEchoChar('*');
             passwordText.setPreferredSize(new Dimension(140, 25));
             panAuth.add(passwordText);
             
@@ -93,4 +96,13 @@ public class LoginView extends JFrame {
 	public void addBtnConnectListener(ActionListener cal) {
             btnConnect.addActionListener(cal);
         }
+        
+        public String getUsername()
+        {
+            return userNameText.getText();
+        }  
+         public String getPassword()
+        {
+            return passwordText.getText();
+        }  
 }

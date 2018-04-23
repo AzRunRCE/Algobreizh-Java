@@ -6,6 +6,7 @@
 package algobreizh.sql.dao.factory;
 
 import algobreizh.Database.DatabaseConnection;
+import algobreizh.Models.City;
 import algobreizh.Models.Customer;
 import algobreizh.Models.Meeting;
 import algobreizh.Models.Salesman;
@@ -25,7 +26,7 @@ public class DAOFactory  extends AbstractDAOFactory{
     protected static final Connection conn = DatabaseConnection.getInstance();   
 
     @Override
-    public DAO getCitiesDAO() {
+    public DAO<City> getCitiesDAO() {
       return new CitiesDAO(conn);
     }
 

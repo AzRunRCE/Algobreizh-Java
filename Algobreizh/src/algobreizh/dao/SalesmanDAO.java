@@ -44,13 +44,23 @@ public class SalesmanDAO  extends DAO<Salesman>{
         return true;
     }
 
-    @Override
-    public boolean delete(Salesman obj) {
-            String query = "DELETE FROM tSalesman WHERE id = "
-                + "\'" + obj.getId()
-                + "\'";
-            ResultSet res = this.execute(query);
-            return true;
+    public Salesman getByCredentials(String username, String password) {
+        String query = "SELECT * FROM tSalesman WHERE username = '" + username + "' AND password = SHA1('"  + password+ "')";
+        Salesman salesman = null;
+        ResultSet res = this.execute(query);
+        if (res != null) {
+            try {
+		while (res.next()) {
+                    String lastname = res.getString("lastname");
+                    String firstname = res.getString("firstname");
+                    int id = res.getInt("id");
+                    salesman = new Salesman(id,firstname,lastname);
+		}
+            } catch (SQLException e) {
+                return null;
+            }
+        }
+        return salesman;
     }
 
     @Override
@@ -66,7 +76,7 @@ public class SalesmanDAO  extends DAO<Salesman>{
     @Override
     public Salesman get(int id) {
         String querry = "SELECT * FROM tSalesman WHERE id = " + id;
-        Salesman salesman = new Salesman();
+        Salesman salesman = null;
         ResultSet res = this.execute(querry);
         if (res != null) {
             try {
@@ -100,6 +110,11 @@ public class SalesmanDAO  extends DAO<Salesman>{
             }
         }
         return salesmans;
+    }
+
+    @Override
+    public boolean delete(Salesman obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

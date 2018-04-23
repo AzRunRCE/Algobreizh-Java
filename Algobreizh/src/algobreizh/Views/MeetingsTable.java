@@ -6,10 +6,7 @@
 package algobreizh.Views;
 
 import algobreizh.Models.Meeting;
-import algobreizh.sql.dao.DAO;
-import algobreizh.sql.dao.factory.AbstractDAOFactory;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JLabel;
@@ -26,7 +23,7 @@ public class MeetingsTable extends JTable{
     public  MeetingsTable(List<Meeting> meetings)
     { 
           
-            this.setModel(new TableModelVehicule(meetings));
+            this.setModel(new TableModelMeeting(meetings));
             this.setRowHeight(30);
             DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
             centerRenderer.setHorizontalAlignment( JLabel.CENTER );
@@ -34,12 +31,12 @@ public class MeetingsTable extends JTable{
           
     } 
     
-     public class TableModelVehicule  extends AbstractTableModel implements DefaultTableModel{
+     public class TableModelMeeting  extends AbstractTableModel implements DefaultTableModel{
             private static final long serialVersionUID = 1L;
             private List<Meeting> meetings = new ArrayList<Meeting>();
 	    private String[] columnNames = {"CLIENT","CONTACT","TELEPHONE", "DATE", "INFORMATIONS" };
 
-	    public TableModelVehicule(List<Meeting> _meetings){
+	    public TableModelMeeting(List<Meeting> _meetings){
 	         this.meetings = _meetings;
 	      
 	    }
@@ -69,9 +66,9 @@ public class MeetingsTable extends JTable{
 	                return meeting.getContact();
                     case 2:
 	                return meeting.getTelephone();
-	            case 3:
-                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-	                return dateFormat.format(meeting.getDate());
+	            case 3: 
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+                        return meeting.getDateTime().format(formatter);
 	            case 4:
 	                return meeting.getInfos();	        
 	           }

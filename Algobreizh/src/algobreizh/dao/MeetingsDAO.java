@@ -5,6 +5,7 @@
  */
 package algobreizh.dao;
 
+import algobreizh.Database.DatabaseConnection;
 import algobreizh.Models.Customer;
 import algobreizh.Models.Meeting;
 import algobreizh.Models.Salesman;
@@ -12,10 +13,14 @@ import algobreizh.sql.dao.DAO;
 import algobreizh.sql.dao.factory.AbstractDAOFactory;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -30,12 +35,20 @@ public class MeetingsDAO  extends DAO<Meeting>{
 
     @Override
     public boolean create(Meeting obj) {
-     String querry = "INSERT INTO tMeetings(id_tSalesman, id_tCustomer, date, infos) VALUES (\'" + obj.getSalesman().getId()
-                + "\',\'" + obj.getCustomer().getId()
-                + "\',\'" + obj.getDate()
-                + "\',\'" + obj.getInfos()
-                + "\')";
-        this.execute(querry); 
+       try {
+            Timestamp timestamp = Timestamp.valueOf(obj.getDateTime());
+            String querry = "INSERT INTO tMeetings(description, contact, telephone, meetingDate, id_tSalesman, id_tCustomers) VALUES (?,?,?,?,?,?)"; 
+            PreparedStatement ps = DatabaseConnection.getInstance().prepareStatement(querry);
+            ps.setString(1, obj.getInfos());
+            ps.setString(2, obj.getContact());
+            ps.setString(3, obj.getTelephone());
+            ps.setTimestamp(4, timestamp);
+            ps.setInt(5, obj.getSalesman().getId());
+            ps.setInt(6, obj.getCustomer().getId());
+            ps.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(MeetingsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return true;
     }
 
@@ -68,13 +81,14 @@ public class MeetingsDAO  extends DAO<Meeting>{
 		while (res.next()) {
                     
                     int id = res.getInt("id");
-                    Date date = res.getDate("MeetingDate");
+                    Timestamp timestamp = res.getTimestamp("MeetingDate");
+                    //Date date = res.getDate("MeetingDate");
                     Customer customer = customersDAO.get(res.getInt("id_tCustomers"));
                     Salesman salesman = salesmanDAO.get(res.getInt("id_tSalesman"));
                     String desc = res.getString("description");
                     String contact = res.getString("contact");
                     String telephone = res.getString("telephone");
-                    Meeting m = new Meeting(id, salesman,customer, date, desc,contact,telephone);
+                    Meeting m = new Meeting(id, salesman,customer, timestamp.toLocalDateTime(), desc,contact,telephone);
                     meetings.add(m);
 		}
             } catch (SQLException e) {
@@ -98,13 +112,13 @@ public class MeetingsDAO  extends DAO<Meeting>{
             try {
 		while (res.next()) {
 
-                    Date date = res.getDate("meetingDate");
+                     Timestamp timestamp = res.getTimestamp("MeetingDate");
                     Customer customer = customersDAO.get(res.getInt("id_tCustomer"));
                     Salesman salesman = salesmanDAO.get(res.getInt("id_tSalesman"));
                     String desc = res.getString("desc");
                     String contact = res.getString("contact");
                     String telephone = res.getString("telephone");
-                    return new Meeting(id, salesman,customer, date, desc,contact,telephone);
+                    return new Meeting(id, salesman,customer, timestamp.toLocalDateTime(), desc,contact,telephone);
                     
 		}
             } catch (SQLException e) {

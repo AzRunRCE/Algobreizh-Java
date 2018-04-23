@@ -5,6 +5,7 @@
  */
 package algobreizh.Views;
 
+import algobreizh.context.Context;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -26,47 +27,45 @@ import javax.swing.KeyStroke;
  */
 
 
-public class MeetingsView extends JFrame{
-   private JTable table;
-        
+public class WelcomeView extends JFrame{
+        private JTable table;
         private JMenuBar bar = new JMenuBar();
-	private JMenu menuClients = new JMenu("Clients");
-	private JMenuItem menuClientsVoir = new JMenuItem("Voir");
+	private JMenu menuCustomers = new JMenu("Clients");
+	private JMenuItem menuCustomersView = new JMenuItem("Voir");
         private JMenu menuMeetings = new JMenu("Rendez-vous");
-	private JMenuItem menuMeetingsVoir = new JMenuItem("Voir");
+	private JMenuItem menuMeetingsView = new JMenuItem("Voir");
         
-        public MeetingsView()
+        public WelcomeView()
         {
                 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle("Algobreizh - Gestion des rendez-vous");
+		this.setTitle("Gestion des rendez-vous (" + 
+                        Context.currUser.getFirstname() + " " + Context.currUser.getLastname() + ")");
 		this.setSize(800, 400);
-                menuClients.add(menuClientsVoir);
-		menuClientsVoir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
+                menuCustomers.add(menuCustomersView);
+		menuCustomersView.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
 				KeyEvent.CTRL_MASK + KeyEvent.SHIFT_DOWN_MASK));
-	//	menuClientsVoir.addActionListener(new ViewMenuListener(this));
-		menuClients.setMnemonic('v');
+		menuCustomers.setMnemonic('v');
                 
-                menuMeetings.add(menuMeetingsVoir);
-                menuMeetingsVoir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,
+                menuMeetings.add(menuMeetingsView);
+                menuMeetingsView.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,
 				KeyEvent.CTRL_MASK + KeyEvent.SHIFT_DOWN_MASK));
-	//	menuMeetingsVoir.addActionListener(new ViewMenuListener(this));
 		menuMeetings.setMnemonic('m');
-		// Données de notre tableau
+		
 		this.setLocationRelativeTo(null);
                 
-                bar.add(menuClients);
+                bar.add(menuCustomers);
                 bar.add(menuMeetings);
                 
                 this.setJMenuBar(bar);
                 
         }
         
-        public void addCloseEditionListener(ActionListener mal) {
-            //	closeEdition.addActionListener(mal);
+        public void addMenuMeetingsViewListener(ActionListener al) {
+           menuMeetingsView.addActionListener(al);
         }
     
-	public void addCancelEditionListener(ActionListener cal) {
-            //cancelEdition.addActionListener(cal);
+	public void addMenuCustomersViewListener(ActionListener al) {
+           menuCustomersView.addActionListener(al);
         }
 
       

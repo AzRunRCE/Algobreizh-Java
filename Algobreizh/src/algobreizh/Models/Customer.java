@@ -5,6 +5,9 @@
  */
 package algobreizh.Models;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+
 /**
  *
  * @author paul
@@ -16,19 +19,29 @@ public class Customer {
     String lastname;
     String email;
     City city;
+    LocalDateTime lastDate;
     
-    public Customer(int _id, String _firstname, String _lastname, String _email, City _city){
+    public Customer(int _id, String _firstname, String _lastname, String _email, City _city, LocalDateTime _date){
         this.id = _id;
         this.firstname = _firstname;
         this.lastname = _lastname;
         this.email = _email;
         this.city = _city;
+        this.lastDate = _date;
     }
     
     public Customer(){
         
     }
-
+    
+    public LocalDateTime getLastDate() {
+        return lastDate;
+    }
+    
+    public void setLastDate(LocalDateTime date) {
+        lastDate = date;
+    }
+    
     public int getId() {
         return id;
     }

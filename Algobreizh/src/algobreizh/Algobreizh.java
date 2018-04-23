@@ -6,16 +6,10 @@
 package algobreizh;
 
 
-import algobreizh.Models.Salesman;
-import algobreizh.Models.Customer;
-import algobreizh.Models.City;
-import algobreizh.Models.Meeting;
+
 import algobreizh.Views.LoginView;
-import algobreizh.Views.MeetingsView;
-import algobreizh.controler.LoginControler;
-import algobreizh.sql.dao.DAO;
-import algobreizh.sql.dao.factory.AbstractDAOFactory;
-import java.util.List;
+import algobreizh.controler.LoginController;
+
 
 /**
  *
@@ -29,7 +23,7 @@ public class Algobreizh {
     
     public static void main(String[] args) {     
         LoginView loginView = new LoginView();
-        LoginControler loginControler = new LoginControler(loginView);
+        LoginController loginControler = new LoginController(loginView);
         loginControler.setVisible(true);   
     }
     
