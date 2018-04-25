@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  jeu. 12 avr. 2018 à 22:38
+-- Généré le :  mer. 25 avr. 2018 à 08:48
 -- Version du serveur :  10.1.30-MariaDB
 -- Version de PHP :  5.6.33
 
@@ -39,7 +39,8 @@ CREATE TABLE `tCities` (
 --
 
 INSERT INTO `tCities` (`id`, `name`, `id_tSalesman`) VALUES
-(1, 'Rennes', 1);
+(1, 'Rennes', 1),
+(2, 'Paris', 2);
 
 -- --------------------------------------------------------
 
@@ -56,18 +57,19 @@ CREATE TABLE `tCustomers` (
   `email` varchar(255) DEFAULT NULL,
   `enabled` tinyint(1) DEFAULT NULL,
   `rights` int(11) DEFAULT NULL,
-  `id_tCities` int(11) NOT NULL
+  `id_tCities` int(11) NOT NULL,
+  `lastMeetingDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `tCustomers`
 --
 
-INSERT INTO `tCustomers` (`id`, `username`, `firstname`, `lastname`, `password`, `email`, `enabled`, `rights`, `id_tCities`) VALUES
-(9, 'qmz', 'Quentin', 'Martinez', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'qmz@algobreizh.fr', 1, 0, 1),
-(10, 'bst', 'Paul', 'Besret', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'bst@algobreizh.fr', 1, 0, 1),
-(11, 'dpe', 'Dorian', 'Pilorge', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'dpe@algobreizh.fr', 1, 0, 1),
-(12, 'adm', 'Admin', 'admin', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'adm@algobreizh.fr', 1, 1, 1);
+INSERT INTO `tCustomers` (`id`, `username`, `firstname`, `lastname`, `password`, `email`, `enabled`, `rights`, `id_tCities`, `lastMeetingDate`) VALUES
+(9, 'qmz', 'Quentin', 'Martinez', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'qmz@algobreizh.fr', 1, 0, 1, '2018-04-22 11:24:00'),
+(10, 'bst', 'Paul', 'Besret', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'bst@algobreizh.fr', 1, 0, 2, '2018-03-14 10:30:00'),
+(11, 'dpe', 'Dorian', 'Pilorge', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'dpe@algobreizh.fr', 1, 0, 1, '2018-04-23 06:28:00'),
+(12, 'adm', 'Admin', 'admin', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'adm@algobreizh.fr', 1, 1, 1, '2018-06-22 11:13:00');
 
 -- --------------------------------------------------------
 
@@ -80,7 +82,7 @@ CREATE TABLE `tMeetings` (
   `description` varchar(255) DEFAULT NULL,
   `contact` varchar(255) DEFAULT NULL,
   `telephone` varchar(255) NOT NULL,
-  `meetingDate` datetime DEFAULT NULL,
+  `meetingDate` timestamp NULL DEFAULT NULL,
   `id_tSalesman` int(11) NOT NULL,
   `id_tCustomers` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -90,8 +92,8 @@ CREATE TABLE `tMeetings` (
 --
 
 INSERT INTO `tMeetings` (`id`, `description`, `contact`, `telephone`, `meetingDate`, `id_tSalesman`, `id_tCustomers`) VALUES
-(1, 'Tous près de la supérette', 'Henry Charles', '', '2018-04-12 00:00:00', 1, 9),
-(2, 'Près de l\'église', 'Jacky Liol', '', '2018-04-12 10:00:00', 2, 9);
+(23, 'Près de l\'église', 'Quentin Martinez', '0648566700', '2018-04-22 11:24:00', 1, 9),
+(24, 'RAS', 'Dorian Pilorge', '3615', '2018-04-23 06:28:00', 1, 11);
 
 -- --------------------------------------------------------
 
@@ -140,16 +142,18 @@ CREATE TABLE `tProducts` (
 CREATE TABLE `tSalesman` (
   `id` int(11) NOT NULL,
   `firstname` varchar(255) NOT NULL,
-  `lastname` varchar(255) NOT NULL
+  `lastname` varchar(255) NOT NULL,
+  `username` varchar(3) NOT NULL,
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `tSalesman`
 --
 
-INSERT INTO `tSalesman` (`id`, `firstname`, `lastname`) VALUES
-(1, 'Harry', 'Potter'),
-(2, 'Jean', 'Paul');
+INSERT INTO `tSalesman` (`id`, `firstname`, `lastname`, `username`, `password`) VALUES
+(1, 'Harry', 'Potter', 'phy', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8'),
+(2, 'Jean', 'Paul', 'pjn', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8');
 
 --
 -- Index pour les tables déchargées
@@ -211,7 +215,7 @@ ALTER TABLE `tSalesman`
 -- AUTO_INCREMENT pour la table `tCities`
 --
 ALTER TABLE `tCities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `tCustomers`
@@ -223,7 +227,7 @@ ALTER TABLE `tCustomers`
 -- AUTO_INCREMENT pour la table `tMeetings`
 --
 ALTER TABLE `tMeetings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT pour la table `tOrders`
